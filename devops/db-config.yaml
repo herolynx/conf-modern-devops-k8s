@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: postgres-secrets
+  labels:
+    db: postgres
+type: Opaque
+data:
+  db.username: bS13cm9uYQ==
+  db.password: YmxhY2tlYWdsZQ==

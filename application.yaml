@@ -1,0 +1,5 @@
+ping:
+  message: Greetings from localhost!
+db:
+  username: None
+  password: What?

@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: k8s-java-sample
+  namespace: default
+data:
+  application.properties: |
+    spring.cloud.kubernetes.secrets.paths=/etc/secrets/postgres-secrets
+    ping.message: Greetings K8s fans!
