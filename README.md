@@ -147,12 +147,20 @@ gcloud container clusters resize ks8-demo-cluster --size SIZE
 
 ### Azure
 
+1) Create cluster
+
 ```
-az acs create 
-    -g <GROUP_ID> 
-    -n ks8-demo-cluster 
-    --orchestrator-type kubernetes 
-    --generate-ssh-keys
+az acs create \ 
+    -g k8s \
+    -n ks8-demo-cluster \ 
+    --orchestrator-type kubernetes \
+    --generate-ssh-keys 
+```
+
+2) Get config for kubectl
+
+```
+az acs kubernetes get-credentials --resource-group=k8s --name=ks8-demo-cluster
 ```
 
 ### AWS
