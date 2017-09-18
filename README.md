@@ -123,7 +123,7 @@ kubectl rollout undo deployment/<name>
 1) Create a cluster (this step can take a few minutes to complete).
 
 ```
-gcloud container clusters create ks8-demo-cluster
+gcloud container clusters create k8s-demo-cluster
 ```
 
 2) Ensure kubectl has authentication credentials:
@@ -135,13 +135,13 @@ gcloud auth application-default login
 3) Get config for kubectl
 
 ```
-gcloud container clusters get-credentials ks8-demo-cluster
+gcloud container clusters get-credentials k8s-demo-cluster
 ```
 
 4) Resize number of nodes in cluster
 
 ```
-gcloud container clusters resize ks8-demo-cluster --size SIZE
+gcloud container clusters resize k8s-demo-cluster --size SIZE
 ```
 
 
@@ -152,7 +152,7 @@ gcloud container clusters resize ks8-demo-cluster --size SIZE
 ```
 az acs create \ 
     -g k8s \
-    -n ks8-demo-cluster \ 
+    -n k8s-demo-cluster \ 
     --orchestrator-type kubernetes \
     --generate-ssh-keys 
 ```
@@ -160,7 +160,7 @@ az acs create \
 2) Get config for kubectl
 
 ```
-az acs kubernetes get-credentials --resource-group=k8s --name=ks8-demo-cluster
+az acs kubernetes get-credentials --resource-group=k8s --name=k8s-demo-cluster
 ```
 
 ### AWS
