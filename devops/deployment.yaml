@@ -30,13 +30,13 @@ spec:
         - name: postgres-secrets
           readOnly: true
           mountPath: "/etc/secrets/postgres-secrets"
-        resources:
-            requests:
-              cpu: 100m
-              memory: 256Mi
-            limits:
-              cpu: 200m
-              memory: 512Mi
+        #resources:
+        #    requests:
+        #      cpu: 100m
+        #      memory: 256Mi
+        #    limits:
+        #      cpu: 200m
+        #      memory: 512Mi
         livenessProbe:
           httpGet:
             path: /probe/health
