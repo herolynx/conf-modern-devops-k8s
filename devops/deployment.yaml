@@ -44,9 +44,9 @@ spec:
             #httpHeaders:
             #  - name: X-Custom-Header
             #    value: Awesome
-          initialDelaySeconds: 120
+          initialDelaySeconds: 15
           timeoutSeconds: 1
-          periodSeconds: 5
+          periodSeconds: 1
           failureThreshold: 3
           successThreshold: 1
         readinessProbe:
@@ -56,9 +56,9 @@ spec:
             #httpHeaders:
             #  - name: X-Custom-Header
             #    value: Awesome
-          initialDelaySeconds: 120
+          initialDelaySeconds: 15
           timeoutSeconds: 5
-          periodSeconds: 5
+          periodSeconds: 1
           failureThreshold: 3
           successThreshold: 1
       volumes:
