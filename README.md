@@ -84,6 +84,18 @@ kubectl proxy
 
 Then open dashboard in web-browser: http://localhost:8001/ui
 
+3) Make new deployment (after changing image version in `devops/deployment.yaml`)
+
+```
+kubectl apply -f devops/deployment.yaml
+```
+
+4) Reload of config (after changing properties in `devops/config.yaml`)
+
+```
+kubectl apply -f devops/config.yaml
+```
+
 ##### Basic operations
 
 1) Get pods
@@ -114,6 +126,12 @@ kubectl delete service|deployment <name>
 
 ```
 kubectl rollout undo deployment/<name>
+```
+
+6) Scaling 
+
+```
+kubectl scale --replicas=3 deployment/k8s-java-sample
 ```
 
 ## Kubernetes - set-up
