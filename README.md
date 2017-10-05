@@ -60,10 +60,24 @@ Pre-requisites:
 ./run.sh
 ```
 
+##### Run on local Kubernetes (using minikube)
+
+1) Deploy all
+
+```
+kubectl create -f devops
+```
+
 2) Access local cluster
 
 ```
 minikube dashboard
+```
+
+3) Checking address of local service
+
+```
+minikube service k8s-java-sample --url
 ```
 
 ## DevOps with Kubernetes
@@ -113,16 +127,22 @@ kubectl get services
 3) Check logs of single pod
 
 ```
-kubectl logs <pod_name> -c <container_name>
+kubectl logs -f <pod_name>
+```
+
+If you have many containers in pod, name of container must be specified:
+
+```
+kubectl logs -f <pod_name> -c <container_name>
 ```
 
 4) Deleting stuff
 
 ```
-kubectl delete service|deployment <name>
+kubectl delete service|deployment|pod <name>
 ```
 
-5) Rollout (provided that `revisionHistoryLimit` > 0)
+5) Rollout (provided that `revisionHistoryLimit` > 0 in `devops/deployment.yaml`)
 
 ```
 kubectl rollout undo deployment/<name>
@@ -131,7 +151,7 @@ kubectl rollout undo deployment/<name>
 6) Scaling 
 
 ```
-kubectl scale --replicas=3 deployment/k8s-java-sample
+kubectl scale --replicas=<number> deployment/<name>
 ```
 
 ## Kubernetes - set-up
@@ -139,6 +159,12 @@ kubectl scale --replicas=3 deployment/k8s-java-sample
 ### Google Cloud Platform
 
 1) Create a cluster (this step can take a few minutes to complete).
+
+```
+gcloud container clusters create k8s-demo-cluster
+```
+
+or if you need more powerful machines:
 
 ```
 gcloud container clusters create k8s-demo-cluster --machine-type n1-standard-2
@@ -150,7 +176,7 @@ gcloud container clusters create k8s-demo-cluster --machine-type n1-standard-2
 gcloud auth application-default login
 ```
 
-3) Get config for kubectl
+3) Get context for kubectl
 
 ```
 gcloud container clusters get-credentials k8s-demo-cluster 
@@ -161,7 +187,6 @@ gcloud container clusters get-credentials k8s-demo-cluster
 ```
 gcloud container clusters resize k8s-demo-cluster --size SIZE
 ```
-
 
 ### Azure
 
