@@ -1,6 +1,6 @@
 # conf-modern-devops-k8s
 
-Sample service that can be deployed in **Kubernetes** created for **demo purposes**.
+Sample micro-service that can be deployed in **Kubernetes** created for **demo purposes**.
 
 Related presentation can be found [here](https://docs.google.com/presentation/d/1pOX8E1BLIDple6zvYGMR5v9Nceax4YD_sE_Jhdp8jTY/edit?usp=sharing)!
 
@@ -12,10 +12,13 @@ Project structure:
 
 **Demo agenda:**
 
+The purposes of this demo & presentation is to show how micro-services can be managed using Kubernetes, thus following scenarios are covered:
+
 * deployment 
-* publishing via service
+* publishing via service & ingress
 * rollback & rolling update
 * config/secrets definition & reloading
+* web-socket support (with TCP connections load balancing)
 
 ## API
 
@@ -25,6 +28,7 @@ Project structure:
 * **POST** `/probe/health`: changing status of health-check
 * **GET** `/probe/ready`: doing readiness check
 * **POST** `/probe/ready`: changing status of readiness
+* `/web-socket`: establish web-socket connection (use `test_web_socket.sh` script, see `web-sockets` section)
 
 ## Build
 
@@ -154,6 +158,12 @@ kubectl rollout undo deployment/<name>
 kubectl scale --replicas=<number> deployment/<name>
 ```
 
+7) Get basic info about your services
+
+```
+watch -n 1 kubectl get configmap,secrets,deployments,services,ingress,nodes,pods
+```
+
 ## Kubernetes - set-up
 
 ### Google Cloud Platform
@@ -279,3 +289,47 @@ kubectl logs sample-pod -c nginx-container
 kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl expose deployment hello-minikube --type=NodePort
 ```
+
+## Web-sockets & Ingress
+
+Support for load balancing is cloud specific since LB are provided externally from the cloud while publishing services.
+
+For web-socket load balancing you need LB L4 (transport layer) in order to balance TCP connections.
+
+So in most cases you'll have to create external LB in front of Kubernetes cluster in order to balance TPC connections.
+
+Related documentation:
+
+* [Web service load balancing](https://blog.vivekpanyam.com/scaling-a-web-service-load-balancing/)
+
+* [Load balancing in GCP](https://cloud.google.com/container-engine/docs/tutorials/http-balancer)
+
+## Local environment
+
+1) Make sure that `ingress` is enabled on `minikube`
+
+```
+minikube addons enable ingress
+```
+
+## Test web-socket connections
+
+1) Check address of `ingress` service
+
+```
+kubectl describe ing
+```
+
+and then check access to address (with follow redirects and insecure option on), i.e.:
+
+```
+curl -L -k http://192.168.99.100/hello
+```
+
+2) Create web-socket
+
+```
+./test_web_socket.sh <URL>
+```
+
+or use `http://www.websocket.org/echo.html` if you want to check it from `web-browser`.
