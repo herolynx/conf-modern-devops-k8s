@@ -304,7 +304,7 @@ Related documentation:
 
 * [Load balancing in GCP](https://cloud.google.com/container-engine/docs/tutorials/http-balancer)
 
-## Local environment
+#### Local environment
 
 1) Make sure that `ingress` is enabled on `minikube`
 
@@ -312,7 +312,7 @@ Related documentation:
 minikube addons enable ingress
 ```
 
-## Test web-socket connections
+#### Test web-socket connections
 
 1) Check address of `ingress` service
 
@@ -339,3 +339,58 @@ or use `http://www.websocket.org/echo.html` if you want to check it from `web-br
 ```
 kubectl delete pod <name>
 ```
+
+## Troubleshooting 
+
+#### Access via `ingress` doesn't work
+
+Check status of ingress:
+
+```
+kubectl descibe ingress <name>
+```
+
+sample output:
+
+```
+14:34 $ kubectl get ingress
+NAME              HOSTS     ADDRESS          PORTS     AGE
+Every 1.0s: kubectl describe ingress main                                                                                                                      
+
+Name:                   main
+Namespace:              default
+Address:                35.190.61.93
+Default backend:        default-http-backend:80 (10.4.2.3:8080)
+Rules:
+  Host  Path    Backends
+  ----  ----    --------
+  *
+        /       k8s-java-sample:80 (<none>)
+Annotations:
+  forwarding-rule:      k8s-fw-default-main--8cd284ff28c67446
+  rewrite-target:       /
+  target-proxy:         k8s-tp-default-main--8cd284ff28c67446
+  url-map:              k8s-um-default-main--8cd284ff28c67446
+  backends:             {"k8s-be-32460--8cd284ff28c67446":"Unknown","k8s-be-32598--8cd284ff28c67446":"Unknown"}
+Events:
+  FirstSeen     LastSeen        Count   From                    SubObjectPath   Type            Reason  Message
+  ---------     --------        -----   ----                    -------------   --------        ------  -------
+  3m            3m              1       loadbalancer-controller                 Normal          ADD     default/main
+  2m            2m              1       loadbalancer-controller                 Normal          CREATE  ip: 35.190.61.93
+  2m            2m              3       loadbalancer-controller                 Normal          Service no user specified default backend, using system default
+
+```
+
+If you have services in `Unknown` or `Unhealthy` status that means that there is some issue with LB.
+
+In such case you have to go to your external LB and add backend services to change status to healthy (i.e. for GCP go to UI console and then `Container engine` -> `Discovery and load balancing`).
+
+You might also want to try create `ingress` using different variants, i.e.:
+
+* `fanout`: ingress_fanout.yaml
+
+* `single service`: ingress_single_service.yml
+
+That helps in example in case of `minikube`.
+
+More details [here](https://kubernetes.io/docs/concepts/services-networking/ingress/).
