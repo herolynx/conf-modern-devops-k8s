@@ -1,4 +1,4 @@
-package com.herolynx.k8s.sample;
+package com.herolynx.k8s.sample.config;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;

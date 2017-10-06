@@ -5,11 +5,11 @@
 
     <groupId>com.herolynx</groupId>
     <artifactId>k8s-java-sample</artifactId>
-    <version>0.0.4</version>
+    <version>1.0.0</version>
     <packaging>jar</packaging>
 
     <name>kubernetes-sample</name>
-    <description>Demo project for microservice using Kubernetes</description>
+    <description>Demo project of micro-service using Kubernetes</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -36,6 +36,14 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
             <groupId>io.fabric8</groupId>
             <artifactId>spring-cloud-starter-kubernetes</artifactId>
             <version>0.1.6</version>
@@ -45,9 +53,14 @@
     <build>
         <plugins>
             <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.0.2</version>
+            </plugin>
+            <plugin>
                 <groupId>com.spotify</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.4.3</version>
+                <version>1.0.0</version>
                 <configuration>
                     <serverId>docker-hub</serverId>
                     <imageName>${docker.user}/k8s-java-sample</imageName>

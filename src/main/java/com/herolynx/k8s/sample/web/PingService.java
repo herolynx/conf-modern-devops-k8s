@@ -1,5 +1,7 @@
-package com.herolynx.k8s.sample;
+package com.herolynx.k8s.sample.web;
 
+import com.herolynx.k8s.sample.config.DbConfig;
+import com.herolynx.k8s.sample.config.ServiceConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

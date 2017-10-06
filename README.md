@@ -16,6 +16,7 @@ Project structure:
 * publishing via service
 * rollback & rolling update
 * config/secrets definition & reloading
+* web-socket support (with TCP connections load balancing)
 
 ## API
 
@@ -278,4 +279,20 @@ kubectl logs sample-pod -c nginx-container
 ```
 kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --port=8080
 kubectl expose deployment hello-minikube --type=NodePort
+```
+
+## Web-sockets
+
+1) Establish web-socket connection
+
+```
+curl --include \
+     --no-buffer \
+     --header "Connection: Upgrade" \
+     --header "Upgrade: websocket" \
+     --header "Host: localhost:8080" \
+     --header "Origin: http://localhost:8080" \
+     --header "Sec-WebSocket-Key: SGVsbG8sIHdvcmxkIQ==" \
+     --header "Sec-WebSocket-Version: 13" \
+     http://localhost:8080/web-socket
 ```

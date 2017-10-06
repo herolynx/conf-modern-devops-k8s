@@ -1,0 +1,14 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: k8s-java-sample
+  annotations:
+    nginx.org/websocket-services: "k8s-java-sample"
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: k8s-java-sample
+          servicePort: 80
