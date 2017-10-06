@@ -333,3 +333,9 @@ curl -L -k http://192.168.99.100/hello
 ```
 
 or use `http://www.websocket.org/echo.html` if you want to check it from `web-browser`.
+
+3) Terminate pods (keeping minimum 1 alive) in order to check whether your web-socket connection will be terminated
+
+```
+kubectl delete pod <name>
+```
