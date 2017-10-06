@@ -294,7 +294,9 @@ kubectl expose deployment hello-minikube --type=NodePort
 
 Support for load balancing is cloud specific since LB are provided externally from the cloud while publishing services.
 
-For web-socket load balancing you need LB L4 (transport layer) in order to dispatch TCP connections.
+For web-socket load balancing you need LB L4 (transport layer) in order to balance TCP connections.
+
+So in most cases you'll have to create external LB in front of Kubernetes cluster in order to balance TPC connections.
 
 Related documentation:
 

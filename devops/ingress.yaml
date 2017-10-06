@@ -4,12 +4,7 @@ metadata:
   name: main
   annotations:
     nginx.org/websocket-services: "k8s-java-sample"
-    ingress.kubernetes.io/rewrite-target: /
 spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: k8s-java-sample
-          servicePort: 80
+ backend:
+    serviceName: k8s-java-sample
+    servicePort: 80
