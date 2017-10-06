@@ -292,6 +292,16 @@ kubectl expose deployment hello-minikube --type=NodePort
 
 ## Web-sockets & Ingress
 
+Support for load balancing is cloud specific since LB are provided externally from the cloud while publishing services.
+
+For web-socket load balancing you need LB L4 (transport layer) in order to dispatch TCP connections.
+
+Related documentation:
+
+* [Web service load balancing](https://blog.vivekpanyam.com/scaling-a-web-service-load-balancing/)
+
+* [Load balancing in GCP](https://cloud.google.com/container-engine/docs/tutorials/http-balancer)
+
 ## Local environment
 
 1) Make sure that `ingress` is enabled on `minikube`

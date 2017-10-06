@@ -7,12 +7,14 @@ if [ -z "${URL}" ]; then
     exit 1
 fi
 
-echo "Checking given address"
+echo
+echo "**********************"
+echo "Checking given address:"
 curl -L -k $URL/hello
 
 echo
-
-echo "Establishing web-socket connection"
+echo "**********************"
+echo "Establishing web-socket connection:"
 curl --include \
      --no-buffer \
      --header "Connection: Upgrade" \
