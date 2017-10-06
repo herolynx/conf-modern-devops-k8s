@@ -26,6 +26,7 @@ Project structure:
 * **POST** `/probe/health`: changing status of health-check
 * **GET** `/probe/ready`: doing readiness check
 * **POST** `/probe/ready`: changing status of readiness
+* `/web-socket`: establish web-socket connection (use `test_web_socket.sh` script, see `web-sockets` section)
 
 ## Build
 
@@ -283,16 +284,36 @@ kubectl expose deployment hello-minikube --type=NodePort
 
 ## Web-sockets
 
-1) Establish web-socket connection
+## Local environment
+
+1) Make sure that `ingress` is enabled on `minikube`
 
 ```
-curl --include \
-     --no-buffer \
-     --header "Connection: Upgrade" \
-     --header "Upgrade: websocket" \
-     --header "Host: localhost:8080" \
-     --header "Origin: http://localhost:8080" \
-     --header "Sec-WebSocket-Key: SGVsbG8sIHdvcmxkIQ==" \
-     --header "Sec-WebSocket-Version: 13" \
-     http://localhost:8080/web-socket
+minikube addons enable ingress
 ```
+
+## Test web-socket connections
+
+1) Check address of `ingress` service
+
+```
+kubectl describe ing
+```
+
+and then check access to address (with follow redirects and insecure option on), i.e.:
+
+```
+curl -L -k http://192.168.99.100/hello
+```
+
+2) Create web-socket
+
+```
+./test_web_socket.sh <URL>
+```
+
+sample URLs:
+
+* http://localhost:8080 (if run locally outside of k8s)
+
+* 
