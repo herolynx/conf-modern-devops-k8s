@@ -10,4 +10,4 @@ spec:
     name : http
   selector:
     app: k8s-java-sample
-  type: LoadBalancer
+  type: NodePort

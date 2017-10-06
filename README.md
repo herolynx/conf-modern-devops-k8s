@@ -13,7 +13,7 @@ Project structure:
 **Demo agenda:**
 
 * deployment 
-* publishing via service
+* publishing via service & ingress
 * rollback & rolling update
 * config/secrets definition & reloading
 * web-socket support (with TCP connections load balancing)
@@ -156,6 +156,12 @@ kubectl rollout undo deployment/<name>
 kubectl scale --replicas=<number> deployment/<name>
 ```
 
+7) Get basic info about your services
+
+```
+watch -n 1 kubectl get nodes,configmap,secrets,deployments,services,ingress,pods
+```
+
 ## Kubernetes - set-up
 
 ### Google Cloud Platform
@@ -282,7 +288,7 @@ kubectl run hello-minikube --image=gcr.io/google_containers/echoserver:1.4 --por
 kubectl expose deployment hello-minikube --type=NodePort
 ```
 
-## Web-sockets
+## Web-sockets & Ingress
 
 ## Local environment
 
@@ -312,8 +318,4 @@ curl -L -k http://192.168.99.100/hello
 ./test_web_socket.sh <URL>
 ```
 
-sample URLs:
-
-* http://localhost:8080 (if run locally outside of k8s)
-
-* 
+or use `http://www.websocket.org/echo.html` if you want to check it from `web-browser`.
