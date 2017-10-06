@@ -1,6 +1,6 @@
 # conf-modern-devops-k8s
 
-Sample service that can be deployed in **Kubernetes** created for **demo purposes**.
+Sample micro-service that can be deployed in **Kubernetes** created for **demo purposes**.
 
 Related presentation can be found [here](https://docs.google.com/presentation/d/1pOX8E1BLIDple6zvYGMR5v9Nceax4YD_sE_Jhdp8jTY/edit?usp=sharing)!
 
@@ -11,6 +11,8 @@ Project structure:
 * `others`: other samples for demo purposes
 
 **Demo agenda:**
+
+The purposes of this demo & presentation is to show how micro-services can be managed using Kubernetes, thus following scenarios are covered:
 
 * deployment 
 * publishing via service & ingress
@@ -159,7 +161,7 @@ kubectl scale --replicas=<number> deployment/<name>
 7) Get basic info about your services
 
 ```
-watch -n 1 kubectl get nodes,configmap,secrets,deployments,services,ingress,pods
+watch -n 1 kubectl get configmap,secrets,deployments,services,ingress,nodes,pods
 ```
 
 ## Kubernetes - set-up
